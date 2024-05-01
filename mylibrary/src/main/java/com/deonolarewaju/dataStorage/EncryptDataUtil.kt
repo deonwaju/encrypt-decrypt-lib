@@ -9,10 +9,9 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
 object EncryptDataUtil {
-
-    private val TRANSFORMDATA = "AES/GCM/NoPadding"
-    private val ANDROID_KEYSTORE = "AndroidKeyStore"
-    private val ENCRYPT_ALIAS = "encrypt_key"
+    private const val TRANSFORM_DATA = "AES/GCM/NoPadding"
+    private const val ANDROID_KEYSTORE = "AndroidKeyStore"
+    private const val ENCRYPT_ALIAS = "encrypt_key"
 
 
     private fun getSecretKey(): SecretKey {
@@ -41,7 +40,7 @@ object EncryptDataUtil {
 
     fun encryptData(data: String): String? {
         try {
-            val cipher = Cipher.getInstance(TRANSFORMDATA)
+            val cipher = Cipher.getInstance(TRANSFORM_DATA)
             cipher.init(Cipher.ENCRYPT_MODE, getSecretKey())
             val encryptBytes = cipher.doFinal(data.toByteArray())
             return Base64.encodeToString(encryptBytes, Base64.DEFAULT)
@@ -53,7 +52,7 @@ object EncryptDataUtil {
 
     fun deCryptData(data: String): String? {
         try {
-            val cipher = Cipher.getInstance(TRANSFORMDATA)
+            val cipher = Cipher.getInstance(TRANSFORM_DATA)
             cipher.init(Cipher.DECRYPT_MODE, getSecretKey())
             val encryptBytes = Base64.decode(data, Base64.DEFAULT)
             val decryptBytes = cipher.doFinal(encryptBytes)
@@ -63,5 +62,4 @@ object EncryptDataUtil {
         }
         return null
     }
-
 }

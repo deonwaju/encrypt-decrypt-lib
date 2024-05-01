@@ -2,7 +2,6 @@ package com.deonolarewaju.dataStorage
 
 import android.content.Context
 import android.content.SharedPreferences
-import javax.crypto.SecretKey
 
 object DataStore {
 
@@ -25,6 +24,4 @@ object DataStore {
             EncryptDataUtil.deCryptData(it) ?: defaultValue
         }
     }
-
-
 }
